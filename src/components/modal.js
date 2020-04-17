@@ -1,114 +1,108 @@
-import React from "react";
-import Modal from "react-modal";
+import React from "./node_modules/react";
+import Modal from "./node_modules/react-modal";
 import "../App.css";
-class Modall extends React.Component {
+class MyModal extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      modalIsOpen: false,
-      img: "",
-      name: "",
-      star: "",
+      showModal: false,
+      title: "",
+      rate: "",
+      imageUrl: "",
       year: "",
-      duration: "",
+      description: "",
     };
   }
 
-  openModal = () => {
-    this.setState({ modalIsOpen: true });
+  showModal = () => {
+    this.setState({ showModal: true });
   };
 
-  // afterOpenModal=()=> {
-  //   // references are now sync'd and can be accessed.
-  //   this.subtitle.style.color = '#f00';
-  // }
-
   closeModal = () => {
-    this.setState({ modalIsOpen: false });
+    this.setState({ showModal: false });
   };
 
   handleChange = (e) => {
-    const { name, value } = e.target;
+    const { title, value } = e.target;
     this.setState({
-      [name]: value,
+      [title]: value,
     });
   };
 
   add = (e) => {
     e.preventDefault()
-    const { img, name, star, year, duration } = this.state;
+    const {title, rate, imageUrl, year, production } = this.state;
     const newMovie = {
-      img, name, star, year, duration
+      title, rate, imageUrl, year, production 
     }
     console.log(newMovie)
    this.props.add(newMovie);
    this.setState({
-     modalIsOpen:false
+     showModal:false
    })
   };
   render() {
     return (
       <div className="">
-        <button className="btn-modal" onClick={this.openModal}>
-          <span role="img" aria-label="add">
-            🔽{" "}
-          </span>
-        </button>
+        <div className="add-card" onClick={this.showModal} >
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSdxwVdH7y2TMTF4hZxwGQC9TgJ6zx8wtF-s_MgxXL_8w3MR1IE&usqp=CAU" alt="add-on"/>
+        </div>
         <Modal
-          isOpen={this.state.modalIsOpen}
+          isOpen={this.state.showModal}
           onRequestClose={this.closeModal}
           className="modall"
           contentLabel="Example Modal"
         >
         
-            <label for="lname">Image Url</label>
-            <input
-              type="text"
-              id="lname"
-              name="img"
-              placeholder="Image url.."
-              onChange={this.handleChange}
-            />
-            <label for="fname">Film Name</label>
+            
+            <label for="fname">Movie Name</label>
             <input
               type="text"
               id="fname"
-              name="name"
-              placeholder="Film name.."
+              name="title"
+              placeholder="Enter movie name"
               onChange={this.handleChange}
             />
 
-            <label for="lname">FIlm rating</label>
+            <label for="lname">Movie rating</label>
             <input
               type="text"
               id="lname"
-              name="star"
-              placeholder="Film rating.."
+              name="rate"
+              placeholder="Enter movie rating"
               onChange={this.handleChange}
             />
-            <label for="lname">year</label>
+            <label for="lname">Production year</label>
             <input
               type="text"
               id="lname"
               name="year"
-              placeholder="Film rating.."
+              placeholder="Enter movie year poduction.."
               onChange={this.handleChange}
             />
-            <label for="lname">duration</label>
+            <label for="lname">Movie Description</label>
             <input
               type="text"
               id="lname"
-              name="duration"
-              placeholder="Film rating.."
+              name="description"
+              placeholder="Enter movie description"
+              onChange={this.handleChange}
+            />
+            <label for="lname">Image Url</label>
+            <input
+              type="text"
+              id="lname"
+              name="imageUrl"
+              placeholder="Enter image url"
               onChange={this.handleChange}
             />
 
-         <button onClick={(e)=>this.add(e)}>add movie</button>
+         <button className="btn btn-primary float-right" onClick={(e)=>this.add(e)}>Add Movie</button>
  
         </Modal>
       </div>
     );
   }
 }
-export default Modall;
+export default MyModal;

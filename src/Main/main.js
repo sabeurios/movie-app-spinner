@@ -1,9 +1,10 @@
 import React from "react";
-import movies from "../data/movies-data";
+import movies from "../MovieDB/movies";
 import MoviesContainer from "../components/movie-container";
-import FilterName from "../components/name-filter";
-import RatingFilter from "../components/ratingFilter";
-import Modall from "../components/modal";
+import FilterName from "../components/filter-by-name";
+import FilterByRate from "../components/filter-by-rate";
+import MyModal from "../components/modal";
+
 class MoviePage extends React.Component {
   state = {
     movies,
@@ -11,7 +12,7 @@ class MoviePage extends React.Component {
     ratingCountFilter: "",
   };
 
-  handleSearch = (input) => {
+  handlefilterByName = (input) => {
     this.setState({
       movieName: input,
     });
@@ -23,7 +24,6 @@ class MoviePage extends React.Component {
   };
 
   addMovie= (newMovie) => {
-      console.log(newMovie)
       this.setState({
           movies: [...this.state.movies,newMovie]
       })
@@ -32,24 +32,24 @@ class MoviePage extends React.Component {
   render() {
     let filterMovie = this.state.movies.filter(
       (movie) =>(
-        (movie.star >= this.state.ratingCountFilter)&&
-        (movie.name.toLowerCase().includes(this.state.movieName.toLowerCase()))
+        (movie.rate >= this.state.ratingCountFilter)&&
+        (movie.title.toLowerCase().includes(this.state.movieName.toLowerCase()))
     ));
     console.log(this.state.movies);
     return (
       <div>
-        <div className="filter-container">
-          <FilterName search={this.handleSearch} />
-          <RatingFilter
-            count={this.state.ratingCountFilter}
+        <div className="nav-container">
+          <FilterName filterByName={this.handlefilterByName} />
+          <FilterByRate
+            rate={this.state.ratingCountFilter}
             onchange={this.handleRatingFilter}
+            size={50}
           />
         </div>
-        <div>
-            <Modall add={this.addMovie}/>
-        </div>
-
+        <div className="global-container">
         <MoviesContainer movies={filterMovie} />
+        <MyModal add={this.addMovie}/>
+        </div>
       </div>
     );
   }

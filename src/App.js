@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import MoviePage from './page/movie-page';
-import Spinner from './components/Spinner/spinner';
+import MoviePage from './Main/main.js';
+import Loader from '.\src\Loader\loader.js'
 
 
 class App extends React.Component {
@@ -9,15 +9,19 @@ class App extends React.Component {
   state = {
     loading: true
   }
+
   componentDidMount() {
-    setTimeout(() => {
+    
+  setTimeout(() => {
       this.setState({loading:false})
-  }, 5000);
-    }
+    }, 3000);
+  }
 
   render(){
     if (this.state.loading) 
-      return <Spinner loading={this.state.loading}/>;
+      {
+        return <Loader loading={this.state.loading}/>;
+      }
     return (
       <div className="App">
           <MoviePage />
