@@ -1,6 +1,7 @@
-import React from "./node_modules/react";
-import Modal from "./node_modules/react-modal";
+import React from 'react'
+import Modal from 'react-modal'
 import "../App.css";
+
 class MyModal extends React.Component {
   constructor() {
     super();

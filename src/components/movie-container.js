@@ -1,4 +1,4 @@
-import React from "./node_modules/react";
+import React from 'react'
 import MovieCard from "./movie-card";
 
 class MoviesContainer extends React.Component {

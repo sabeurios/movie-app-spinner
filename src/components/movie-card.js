@@ -1,5 +1,4 @@
-import React from './node_modules/react'
-import Rating from './star-rating'
+import React from 'react'
 import StarRating from './star-rating'
 
 const MovieCard = (props) => {

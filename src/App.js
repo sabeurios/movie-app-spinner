@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import MoviePage from './Main/main.js';
-import Loader from '.\src\Loader\loader.js'
+import Loader from './Loader/loader';
 
 
 class App extends React.Component {
